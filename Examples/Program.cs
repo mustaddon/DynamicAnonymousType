@@ -2,7 +2,7 @@
 using DynamicAnonymousType;
 
 
-var type = DynamicFactory.CreateType("Id", "Name", "Date")
+Type type = DynamicFactory.CreateType("Id", "Name", "Date")
     .MakeGenericType(typeof(int), typeof(string), typeof(DateTime?));
 
 dynamic instance1 = type.CreateInstance(new() {
