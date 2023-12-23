@@ -6,14 +6,13 @@ public partial class Tests
     public void ThousandProps()
     {
         var propVals = Enumerable.Range(0, 1000)
-            .Select(x => new KeyValuePair<string, object?>($"Prop{x}", x + 1000));
+            .Select(x => ($"Prop{x}", (object?)(x + 1000)));
 
-        var type = DynamicFactory.CreateType(propVals.Select(x => x.Key))
-            .MakeGenericType(propVals.Select(x => typeof(int)).ToArray());
+        var type = DynamicFactory.CreateType(propVals.Select(x => (x.Item1, typeof(int))));
 
         dynamic instA = DynamicFactory.CreateInstance(type, propVals);
         dynamic instB = DynamicFactory.CreateInstance(type, propVals);
-        dynamic instC = DynamicFactory.CreateInstance(type, propVals.Select(x => new KeyValuePair<string, object?>(x.Key, (int)x.Value! + 100)));
+        dynamic instC = DynamicFactory.CreateInstance(type, propVals.Select(x => (x.Item1, (object?)((int)x.Item2! + 100))));
      
         Assert.That(instA, Is.Not.Null);
         Assert.That(object.Equals(instA, instB), Is.True);

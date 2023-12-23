@@ -16,8 +16,7 @@ public partial class Tests
             { "Null", null }
         };
 
-        var type = DynamicFactory.CreateType(propVals.Select(x => x.Key))
-            .MakeGenericType(propVals.Select(x => x.Value?.GetType() ?? typeof(object)).ToArray());
+        var type = DynamicFactory.CreateType(propVals.Select(x => (x.Key, x.Value?.GetType() ?? typeof(object))));
 
         dynamic instance = DynamicFactory.CreateInstance(type, propVals);
 

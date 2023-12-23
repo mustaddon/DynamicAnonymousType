@@ -6,11 +6,14 @@ namespace DynamicAnonymousType;
 
 public static partial class DynamicFactory
 {
-    public static Type CreateType(params string[] propNames)
+    public static Type CreateType(params ValueTuple<string, Type>[] propTypes) => CreateType(propTypes.AsEnumerable());
+    public static Type CreateType(IEnumerable<ValueTuple<string, Type>> propTypes)
     {
-        return CreateType(propNames as IEnumerable<string>);
+        return CreateType(propTypes.Select(x => x.Item1))
+            .MakeGenericType(propTypes.Select(x => x.Item2).ToArray());
     }
 
+    public static Type CreateType(params string[] propNames) => CreateType(propNames.AsEnumerable());
     public static Type CreateType(IEnumerable<string> propNames)
     {
         return Types.GetOrAdd(string.Join("|", propNames), x => new Lazy<Type>(() => DefineType(propNames))).Value;
@@ -19,9 +22,9 @@ public static partial class DynamicFactory
     private static TypeInfo DefineType(IEnumerable<string> propNames)
     {
         var name = $"DynamicAnonymousType_{Guid.NewGuid():N}";
-        
+
         return Module.DefineType(name, TypeAttributes.Public | TypeAttributes.Class)
-            .AddGenericParams(propNames.Select((x,i) => "T" + i), out var genericParams)
+            .AddGenericParams(propNames.Select((x, i) => "T" + i), out var genericParams)
             .AddProperties(propNames, genericParams, out var fields)
             .OverrideEquals(fields)
             .OverrideGetHashCode(fields)
