@@ -10,10 +10,9 @@ Type type = DynamicFactory.CreateType(
     ("Name", typeof(string)),
     ("Date", typeof(DateTime?)));
 
-dynamic instance = type.CreateInstance(new() {
-    { "Id", 1 },
-    { "Name", "Text1" },
-    { "Date", DateTime.Now },
-});
+dynamic instance = type.CreateInstance(
+    ("Id", 1),
+    ("Name", "Text1"),
+    ("Date", DateTime.Now));
 ```
 [Program.cs](https://github.com/mustaddon/DynamicAnonymousType/tree/main/Examples/Program.cs)
