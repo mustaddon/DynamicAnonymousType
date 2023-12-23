@@ -1,7 +1,6 @@
 # DynamicAnonymousType [![NuGet version](https://badge.fury.io/nu/DynamicAnonymousType.svg?)](http://badge.fury.io/nu/DynamicAnonymousType)
 Dynamic creating Anonymous (similar) Types at program runtime
 
-## Example
 ```C#
 using DynamicAnonymousType;
 
