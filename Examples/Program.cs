@@ -1,5 +1,4 @@
 ﻿using DynamicAnonymousType;
-using System.Text.Json;
 
 
 // Creating Type
@@ -15,12 +14,12 @@ dynamic instance1 = type.CreateInstance(
     ("Name", "Text1"),
     ("Date", DateTime.Now));
 
-Console.WriteLine(JsonSerializer.Serialize(instance1));
+Console.WriteLine(instance1);
 
 // OR
 dynamic instance2 = type.CreateInstance();
 instance2.Id = 2;
 instance2.Name = "Text2";
 
-Console.WriteLine(JsonSerializer.Serialize(instance2));
+Console.WriteLine(instance2);
 

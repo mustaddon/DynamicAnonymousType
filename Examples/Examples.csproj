@@ -12,4 +12,8 @@
     <ProjectReference Include="..\DynamicAnonymousType\DynamicAnonymousType.csproj" />
   </ItemGroup>
 
+  <ItemGroup Condition="'$(TargetFramework)' == 'net48'">
+    <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+
 </Project>

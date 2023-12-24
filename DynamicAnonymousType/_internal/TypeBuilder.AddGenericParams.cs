@@ -1,6 +1,5 @@
-﻿using System.Reflection;
-using System.Reflection.Emit;
-namespace DynamicAnonymousType;
+﻿using System.Reflection.Emit;
+namespace _internal;
 
 internal static partial class TypeBuilderExt
 {

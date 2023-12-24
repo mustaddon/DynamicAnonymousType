@@ -1,4 +1,5 @@
-﻿using System.Collections.Concurrent;
+﻿using _internal;
+using System.Collections.Concurrent;
 using System.Reflection;
 using System.Reflection.Emit;
 
@@ -28,7 +29,7 @@ public static partial class DynamicFactory
             .AddProperties(propNames, genericParams, out var fields)
             .OverrideEquals(fields)
             .OverrideGetHashCode(fields)
-            //.OverrideToString() --> no one needs
+            .OverrideToString()
             .CreateTypeInfo()!;
     }
 

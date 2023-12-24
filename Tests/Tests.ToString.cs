@@ -1,11 +1,11 @@
-using System.Text;
+using _internal;
 
 namespace Tests;
 
 public partial class Tests
 {
-    //[Test]
-    public void ToStringM()
+    [Test]
+    public void ToStringT()
     {
         var propVals = new Dictionary<string, object?>() {
             { "Id", 100 },
@@ -20,18 +20,6 @@ public partial class Tests
 
         dynamic instance = DynamicFactory.CreateInstance(type, propVals);
 
-        var props = type.GetProperties(BindingFlags.Public | BindingFlags.Instance);
-        var builder = new StringBuilder();
-        builder.Append("{ ");
-        for (var i = 0; i < props.Length; i++)
-        {
-            if (i > 0) builder.Append(", ");
-            builder.Append(props[i].Name);
-            builder.Append(" = ");
-            builder.Append(props[i].GetValue(instance)?.ToString() ?? string.Empty);
-        }
-        builder.Append(" }");
-
-        Assert.That(instance.ToString(), Is.EqualTo(builder.ToString()));
+        Assert.That(instance.ToString(), Is.EqualTo(Common.ToString(instance)));
     }
 }
