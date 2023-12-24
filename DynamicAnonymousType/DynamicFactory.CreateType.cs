@@ -35,9 +35,7 @@ public static partial class DynamicFactory
 
     private static readonly ConcurrentDictionary<string, Lazy<Type>> Types = new();
 
-    private const string AssemblyName = "DynamicAnonymousType.Dynamic";
-
     private static readonly ModuleBuilder Module = AssemblyBuilder
-        .DefineDynamicAssembly(new AssemblyName(AssemblyName), AssemblyBuilderAccess.Run)
-        .DefineDynamicModule(AssemblyName);
+        .DefineDynamicAssembly(new AssemblyName("DynamicAnonymousType.Dynamic"), AssemblyBuilderAccess.Run)
+        .DefineDynamicModule("DynamicAnonymousType.Dynamic");
 }
