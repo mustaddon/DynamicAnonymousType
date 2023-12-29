@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using System.Reflection.Emit;
 using System.Text;
-namespace _internal;
+namespace DynamicAnonymousType._internal;
 
 internal static partial class TypeBuilderExt
 {
@@ -16,10 +16,9 @@ internal static partial class TypeBuilderExt
 
         methodIL.DeclareLocal(typeof(string));
 
-        // return Common.ToString(this);
         methodIL.Emit(OpCodes.Nop);
         methodIL.Emit(OpCodes.Ldarg_0);
-        methodIL.Emit(OpCodes.Call, CommonToString);
+        methodIL.Emit(OpCodes.Call, _toString);
         methodIL.Emit(OpCodes.Stloc_0);
         methodIL.Emit(OpCodes.Ldloc_0);
         methodIL.Emit(OpCodes.Ret);
@@ -27,12 +26,12 @@ internal static partial class TypeBuilderExt
         return typeBuilder;
     }
 
-    static readonly MethodInfo CommonToString = typeof(Common).GetMethod(nameof(Common.ToString), BindingFlags.Public | BindingFlags.Static)!;
+    static readonly MethodInfo _toString = new Func<object, string>(ObjectToStringBuilder.Build).Method;
 }
 
-public static partial class Common
+public static class ObjectToStringBuilder
 {
-    public static string ToString(object obj)
+    public static string Build(object obj)
     {
         var props = obj.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
         var builder = new StringBuilder();

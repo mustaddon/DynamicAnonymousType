@@ -1,5 +1,5 @@
 ﻿using System.Reflection.Emit;
-namespace _internal;
+namespace DynamicAnonymousType._internal;
 
 internal static partial class TypeBuilderExt
 {

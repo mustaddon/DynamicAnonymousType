@@ -1,4 +1,4 @@
-﻿using _internal;
+﻿using DynamicAnonymousType._internal;
 using System.Collections.Concurrent;
 using System.Reflection;
 using System.Reflection.Emit;

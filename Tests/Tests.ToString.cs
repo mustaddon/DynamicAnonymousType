@@ -1,4 +1,4 @@
-using _internal;
+using DynamicAnonymousType._internal;
 
 namespace Tests;
 
@@ -20,6 +20,6 @@ public partial class Tests
 
         dynamic instance = DynamicFactory.CreateInstance(type, propVals);
 
-        Assert.That(instance.ToString(), Is.EqualTo(Common.ToString(instance)));
+        Assert.That(instance.ToString(), Is.EqualTo(ObjectToStringBuilder.Build(instance)));
     }
 }

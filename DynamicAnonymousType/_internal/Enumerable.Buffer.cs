@@ -1,6 +1,5 @@
 ﻿using System.Collections;
-
-namespace _internal;
+namespace DynamicAnonymousType._internal;
 
 internal static partial class EnumerableExt
 {
