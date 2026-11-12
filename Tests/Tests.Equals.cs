@@ -25,4 +25,22 @@ public partial class Tests
         Assert.That(object.Equals(instA, instD), Is.False);
         Assert.That(object.Equals(instC, instD), Is.False);
     }
+
+    [Test]
+    public void NullValuesAreAssigned()
+    {
+        var type = DynamicFactory.CreateType(
+            ("Id", typeof(int?)),
+            ("Name", typeof(string)));
+
+        dynamic instance = DynamicFactory.CreateInstance(type,
+            new[]
+            {
+                new KeyValuePair<string, object?>("Id", null),
+                new KeyValuePair<string, object?>("Name", null)
+            });
+
+        Assert.That((int?)instance.Id, Is.Null);
+        Assert.That((string?)instance.Name, Is.Null);
+    }
 }
